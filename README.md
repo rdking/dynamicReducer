@@ -18,5 +18,4 @@ Highlights
 ==========
 DynamicReducer introduces the concept of a scope for all actions, states, listeners, and reducers that it manages. This scope is just a string used to uniquely identify a bundle of state data, actions, listeners, and reducer functions that all have the same lifetime. This scope iswhat allows dynamicReducer to efficiently identify when your state data needs to be initialized, as well as remove it all once the chosen ending event has been fired.
 
-Documentation for the API is in the ```/docs``` folder.
-
+Documentation for the API can be found [here](https://rdking.github.io/dynamicReducer). More detail will be added as I learn how to use jsdoc.

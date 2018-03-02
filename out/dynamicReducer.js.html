@@ -1,4 +1,32 @@
-import { connect } from 'react-redux';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: dynamicReducer.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: dynamicReducer.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { connect } from 'react-redux';
 import createTypedActionCreator from './Action';
 import _ from 'lodash';
 
@@ -9,35 +37,35 @@ import _ from 'lodash';
  * as well. It's structure is as follows:
  * 
  * scopes: {
- *   <scopeName>: {
+ *   &lt;scopeName>: {
  *     initializers: [
  *       {
  *         action: {   //Optional if store exists
  *           actionBuilderName: 'create' + toCamelCase(actionName),
- *           ['create' + toCamelCase(actionName)]: <action creator method>,
- *           name: <actionName>,
- *           reducer: <reducer method>
+ *           ['create' + toCamelCase(actionName)]: &lt;action creator method>,
+ *           name: &lt;actionName>,
+ *           reducer: &lt;reducer method>
  *         },
  *         state: {    //Optional if action exists
- *           init: <Initialization object>,
+ *           init: &lt;Initialization object>,
  *           root: path under state for data
  *         }
  *       }
  *     ],
  * 	   components: [
- *       <React.Component>, ...
+ *       &lt;React.Component>, ...
  *     ],
  *     listeners: [
  *       {
- *         handler: <subscription method>,
- *         unsubscribe: <unsubscribe method>
+ *         handler: &lt;subscription method>,
+ *         unsubscribe: &lt;unsubscribe method>
  *       }
  *     ],
- *     <actionName>: {
+ *     &lt;actionName>: {
  *       actionBuilderName: 'create' + toCamelCase(actionName),
- *       ['create' + toCamelCase(actionName)]: <action creator method>,
- *       name: <actionName>,
- *       reducer: <reducer method>
+ *       ['create' + toCamelCase(actionName)]: &lt;action creator method>,
+ *       name: &lt;actionName>,
+ *       reducer: &lt;reducer method>
  *     }
  *   }
  * }
@@ -59,7 +87,7 @@ function toCamelCase(name) {
 		var pieces = name.split('_');
 		retval = '';
 
-		for (var i=0; i<pieces.length; ++i) {
+		for (var i=0; i&lt;pieces.length; ++i) {
 			retval += pieces[i][0].toUpperCase() + pieces[i].substring(1).toLowerCase();
 		}
 	}
@@ -112,7 +140,7 @@ function initializeScope(init, state) {
 }
 
 function destroyScope(scope, state) {
-	for (var i=0; i<scope.initializers.length; ++i) {
+	for (var i=0; i&lt;scope.initializers.length; ++i) {
 		let cfg = scope.initializers[i];
 		switch(cfg.type) {
 			case 'action':
@@ -168,9 +196,9 @@ export default function reducer (state, action) {
 		case INITIALIZE: {
 			let scope = (action.scope) ? [ action.scope ] : Object.keys(modifiers);
 			
-			for (let i=0; i<scope.length; ++i) {
+			for (let i=0; i&lt;scope.length; ++i) {
 				let mod = modifiers[scope[i]];
-				if (mod && !mod.initial.launched) {
+				if (mod &amp;&amp; !mod.initial.launched) {
 					mod.initial.launched = true;
 					mod.final.launched = false;
 					initializers.push(mod.initial.method);
@@ -193,7 +221,7 @@ export default function reducer (state, action) {
 			break;
 		}
 		default: {
-			if (scopes[action.scope] && (action.type in scopes[action.scope])) {
+			if (scopes[action.scope] &amp;&amp; (action.type in scopes[action.scope])) {
 				retval = scopes[action.scope][action.type].reducer(retval, action);
 			}
 			else {
@@ -341,14 +369,14 @@ export function registerReducerActionListener(scope, listener) {
  * Reducer into Redux
  */
 export function getRegisteredReducerScope(scope) {
-	if (modifiers[scope] && !modifiers[scope].initial.launched) {
+	if (modifiers[scope] &amp;&amp; !modifiers[scope].initial.launched) {
 		dataStore.dispatch({scope, type: INITIALIZE});
 	}
 	var retval = {
 		ActionState: (state) => {
 			var current = scopes[scope] || {};
 			var retval = {};
-			if (current.initializers && current.initializers[0] && current.initializers[0].state) {
+			if (current.initializers &amp;&amp; current.initializers[0] &amp;&amp; current.initializers[0].state) {
 				retval = getObjectAtPath(state, current.initializers[0].state.root);
 			}
 
@@ -442,7 +470,7 @@ export const DynamicReducerMiddleware = (store) => (next) => (action) => {
 		retval = next(action);
 		var mod = modifiers[action.scope];
 
-		if (mod && (mod.destroyAfter === action.type) && !mod.final.launched) {
+		if (mod &amp;&amp; (mod.destroyAfter === action.type) &amp;&amp; !mod.final.launched) {
 			mod.final.method();
 			mod.final.launched = true;
 			mod.initial.launched = false;
@@ -455,3 +483,26 @@ export const DynamicReducerMiddleware = (store) => (next) => (action) => {
 
 	return retval;
 }
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#DynamicReducerMiddleware">DynamicReducerMiddleware</a></li><li><a href="global.html#getRegisteredReducerScope">getRegisteredReducerScope</a></li><li><a href="global.html#InitDataStore">InitDataStore</a></li><li><a href="global.html#registerReducerAction">registerReducerAction</a></li><li><a href="global.html#registerReducerActionListener">registerReducerActionListener</a></li><li><a href="global.html#registerReducerModifiers">registerReducerModifiers</a></li><li><a href="global.html#registerReducerScopeState">registerReducerScopeState</a></li><li><a href="global.html#removeRegisteredReducerScope">removeRegisteredReducerScope</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri Mar 02 2018 11:26:43 GMT-0600 (CST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
