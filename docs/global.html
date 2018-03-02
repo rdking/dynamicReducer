@@ -104,8 +104,17 @@
 
 
 <div class="description">
-    Redux middleware that enables automation of state, action, and reducer
-inclusion and exclusion.
+    <p>Redux middleware that enables automation of state, action, and reducer
+inclusion and exclusion. This middleware should be added to the store at
+the time of creation for best result. In fact, the only reason I don't 
+declare the store within dynamic reducer is that I can't be certain the
+developer doesn't want to use other redux middleware.</p>
+<h2>Example Usage</h2><pre class="prettyprint source lang-javascript"><code>import { createStore, applyMiddleware } from 'redux';
+import DynamicReducer, { DynamicReducerMiddleware, InitDataStore } from  './Redux/DynamicReducer';
+
+const store = createStore(DynamicReducer, applyMiddleware(DynamicReducerMiddleware));
+InitDataStore(store);
+export default store;</code></pre>
 </div>
 
 
@@ -143,7 +152,7 @@ inclusion and exclusion.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="dynamicReducer.js.html">dynamicReducer.js</a>, <a href="dynamicReducer.js.html#line419">line 419</a>
+        <a href="dynamicReducer.js.html">dynamicReducer.js</a>, <a href="dynamicReducer.js.html#line438">line 438</a>
     </li></ul></dd>
     
 
@@ -171,7 +180,7 @@ inclusion and exclusion.
     
 
     
-    <h4 class="name" id="getRegisteredReducerScope"><span class="type-signature"></span>getRegisteredReducerScope<span class="signature">(scope)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id="getRegisteredReducerScope"><span class="type-signature"></span>getRegisteredReducerScope<span class="signature">(scope)</span><span class="type-signature"> &rarr; {<a href="global.html#RegisteredScope">RegisteredScope</a>}</span></h4>
     
 
     
@@ -179,7 +188,7 @@ inclusion and exclusion.
 
 
 <div class="description">
-    Retrieves 3 pieces of useful information from the registration data.
+    <p>Retrieves 3 pieces of useful information from the registration data.</p>
 </div>
 
 
@@ -231,9 +240,9 @@ inclusion and exclusion.
 
             
 
-            <td class="description last">A unique name for a configuring group
+            <td class="description last"><p>A unique name for a configuring group
 where all related registration info will be held. Used to later remove all
-associated state, actions, and reducers.</td>
+associated state, actions, and reducers.</p></td>
         </tr>
 
     
@@ -241,82 +250,6 @@ associated state, actions, and reducers.</td>
 </table>
 
 
-
-
-
-
-    <h5 class="subsection-title">Properties:</h5>
-
-    
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>retval.ActionState</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Use as value for mapStateToProps in
-the connect() call.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>retval.ActionBuilders</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Use as substitute for mapDispatchToProps</td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -350,7 +283,7 @@ the connect() call.</td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="dynamicReducer.js.html">dynamicReducer.js</a>, <a href="dynamicReducer.js.html#line338">line 338</a>
+        <a href="dynamicReducer.js.html">dynamicReducer.js</a>, <a href="dynamicReducer.js.html#line343">line 343</a>
     </li></ul></dd>
     
 
@@ -377,8 +310,8 @@ the connect() call.</td>
 
         
 <div class="param-desc">
-    returns the key data needed to fully connect Dynamic
-Reducer into Redux
+    <p>returns the key data needed to fully connect Dynamic
+Reducer into Redux</p>
 </div>
 
 
@@ -389,7 +322,7 @@ Reducer into Redux
     </dt>
     <dd>
         
-<span class="param-type">Object</span>
+<span class="param-type"><a href="global.html#RegisteredScope">RegisteredScope</a></span>
 
 
     </dd>
@@ -415,9 +348,9 @@ Reducer into Redux
 
 
 <div class="description">
-    Used to give Dynamic Reducer the access to manage the data store along
+    <p>Used to give Dynamic Reducer the access to manage the data store along
 with Redux. Also registers the listener used to initialize the scope
-when needed.
+when needed.</p>
 </div>
 
 
@@ -469,7 +402,7 @@ when needed.
 
             
 
-            <td class="description last">The data store to manage.</td>
+            <td class="description last"><p>The data store to manage.</p></td>
         </tr>
 
     
@@ -510,7 +443,7 @@ when needed.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="dynamicReducer.js.html">dynamicReducer.js</a>, <a href="dynamicReducer.js.html#line406">line 406</a>
+        <a href="dynamicReducer.js.html">dynamicReducer.js</a>, <a href="dynamicReducer.js.html#line411">line 411</a>
     </li></ul></dd>
     
 
@@ -552,7 +485,7 @@ when needed.
 
 
 <div class="description">
-    Registers a new Redux action and it's corresponding reducer.
+    <p>Registers a new Redux action and it's corresponding reducer.</p>
 </div>
 
 
@@ -604,9 +537,9 @@ when needed.
 
             
 
-            <td class="description last">A unique name for a configuring group
+            <td class="description last"><p>A unique name for a configuring group
 where all related registration info will be held. Used to later remove all
-associated state, actions, and reducers.</td>
+associated state, actions, and reducers.</p></td>
         </tr>
 
     
@@ -629,7 +562,7 @@ associated state, actions, and reducers.</td>
 
             
 
-            <td class="description last">Name of the action being registered.</td>
+            <td class="description last"><p>Name of the action being registered.</p></td>
         </tr>
 
     
@@ -652,7 +585,7 @@ associated state, actions, and reducers.</td>
 
             
 
-            <td class="description last">Names of the action payload fields.</td>
+            <td class="description last"><p>Names of the action payload fields.</p></td>
         </tr>
 
     
@@ -675,8 +608,8 @@ associated state, actions, and reducers.</td>
 
             
 
-            <td class="description last">Function that will be used to handle the action
-being registered</td>
+            <td class="description last"><p>Function that will be used to handle the action
+being registered</p></td>
         </tr>
 
     
@@ -759,8 +692,8 @@ being registered</td>
 
 
 <div class="description">
-    Registers a new Redux listener. This listener will be removed when the 
-corresponding scope is destroyed.
+    <p>Registers a new Redux listener. This listener will be removed when the 
+corresponding scope is destroyed.</p>
 </div>
 
 
@@ -812,9 +745,9 @@ corresponding scope is destroyed.
 
             
 
-            <td class="description last">A unique name for a configuring group
+            <td class="description last"><p>A unique name for a configuring group
 where all related registration info will be held. Used to later remove all
-associated state, actions, and reducers.</td>
+associated state, actions, and reducers.</p></td>
         </tr>
 
     
@@ -837,8 +770,8 @@ associated state, actions, and reducers.</td>
 
             
 
-            <td class="description last">A function to call after any action is
-dispatched.</td>
+            <td class="description last"><p>A function to call after any action is
+dispatched.</p></td>
         </tr>
 
     
@@ -921,10 +854,10 @@ dispatched.</td>
 
 
 <div class="description">
-    Registers the action that will trigger the scope's destruction, and an 
+    <p>Registers the action that will trigger the scope's destruction, and an 
 initialization function against the given scope. This allows
 DynamicReducer a means of automatically building and destroying Redux
-actions, reducers, and states as needed.
+actions, reducers, and states as needed.</p>
 </div>
 
 
@@ -976,9 +909,9 @@ actions, reducers, and states as needed.
 
             
 
-            <td class="description last">A unique name for a configuring group
+            <td class="description last"><p>A unique name for a configuring group
 where all related registration info will be held. Used to later remove all
-associated state, actions, and reducers.</td>
+associated state, actions, and reducers.</p></td>
         </tr>
 
     
@@ -1001,8 +934,8 @@ associated state, actions, and reducers.</td>
 
             
 
-            <td class="description last">Name of the action after which the given
-scope should be destroyed.</td>
+            <td class="description last"><p>Name of the action after which the given
+scope should be destroyed.</p></td>
         </tr>
 
     
@@ -1025,7 +958,7 @@ scope should be destroyed.</td>
 
             
 
-            <td class="description last">Function used to initialize the given scope.</td>
+            <td class="description last"><p>Function used to initialize the given scope.</p></td>
         </tr>
 
     
@@ -1108,7 +1041,7 @@ scope should be destroyed.</td>
 
 
 <div class="description">
-    Registers a new Redux state object and it's corresponding initializer.
+    <p>Registers a new Redux state object and it's corresponding initializer.</p>
 </div>
 
 
@@ -1160,9 +1093,9 @@ scope should be destroyed.</td>
 
             
 
-            <td class="description last">A unique name for a configuring group
+            <td class="description last"><p>A unique name for a configuring group
 where all related registration info will be held. Used to later remove all
-associated state, actions, and reducers.</td>
+associated state, actions, and reducers.</p></td>
         </tr>
 
     
@@ -1185,8 +1118,8 @@ associated state, actions, and reducers.</td>
 
             
 
-            <td class="description last">Field path through the state to the location where
-the new state will exist.</td>
+            <td class="description last"><p>Field path through the state to the location where
+the new state will exist.</p></td>
         </tr>
 
     
@@ -1209,7 +1142,7 @@ the new state will exist.</td>
 
             
 
-            <td class="description last">Object containing initial state data.</td>
+            <td class="description last"><p>Object containing initial state data.</p></td>
         </tr>
 
     
@@ -1292,8 +1225,8 @@ the new state will exist.</td>
 
 
 <div class="description">
-    Removes actions, reducers, and state associated with the named scope from
-the active process.
+    <p>Removes actions, reducers, and state associated with the named scope from
+the active process.</p>
 </div>
 
 
@@ -1345,7 +1278,7 @@ the active process.
 
             
 
-            <td class="description last">the name of the configuring group to remove</td>
+            <td class="description last"><p>the name of the configuring group to remove</p></td>
         </tr>
 
     
@@ -1386,7 +1319,7 @@ the active process.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="dynamicReducer.js.html">dynamicReducer.js</a>, <a href="dynamicReducer.js.html#line391">line 391</a>
+        <a href="dynamicReducer.js.html">dynamicReducer.js</a>, <a href="dynamicReducer.js.html#line396">line 396</a>
     </li></ul></dd>
     
 
@@ -1418,6 +1351,177 @@ the active process.
     
 
     
+        <h3 class="subsection-title">Type Definitions</h3>
+
+        
+                
+<h4 class="name" id="RegisteredScope">RegisteredScope</h4>
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>Actions</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Each key in Actions is the name of a registered action.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ActionState</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Use as value for mapStateToProps in
+the connect() call.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ActionBuilders</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Use as substitute for mapDispatchToProps</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="dynamicReducer.js.html">dynamicReducer.js</a>, <a href="dynamicReducer.js.html#line326">line 326</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+            
+    
 
     
 </article>
@@ -1436,7 +1540,7 @@ the active process.
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri Mar 02 2018 00:51:11 GMT-0600 (CST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri Mar 02 2018 11:26:43 GMT-0600 (CST)
 </footer>
 
 <script> prettyPrint(); </script>
