@@ -29,4 +29,115 @@ Documentation for the API can be found [here](https://rdking.github.io/dynamicRe
 * ```InitDataStore``` - Use to give this library access to the data store.
 * ```DynamicReducerMiddleware``` - Use to automate management of scope and state configuration.
 
-//TODO: Add example code.
+Example
+-------
+***Actions.js***
+```javascript
+import { getRegisteredReducerScope, registerReducerAction, registerReducerModifiers } from '../data/Redux/DynamicReducer';
+import _ from 'lodash';
+
+var scope = 'Splash';
+
+function Initialize() {
+	registerReducerAction(scope, 'AFTER_FADE_IN', [], (state, action) => {
+		var retval= _.cloneDeep(state);
+		//TODO: Check app version
+		//TODO: Get Appa Settings.
+		//TODO: Get LaunchDarkly Flags
+
+		return retval;
+	});
+
+	registerReducerAction(scope, 'AFTER_ANIMATION', ['navigation'], (state, action) => {
+		var navigation = action.payload.navigation;
+		var retval = _.cloneDeep(state);
+
+		if (state.hasCredentials) {
+			//TODO: Attempt autoLogin
+		}
+		
+		if (state.session instanceof Object) {
+			console.log("Jump-starting session...");
+			navigation.navigate('Session');
+		}
+		else {
+			console.log("Login required!");
+			navigation.navigate('LoginView');
+		}
+
+		return retval;
+	});
+}
+
+registerReducerModifiers(scope, 'AFTER_ANIMATION', Initialize);
+
+const { Actions, ActionState, ActionBuilders } = getRegisteredReducerScope(scope);
+export { scope, Actions, ActionState, ActionBuilders };
+```
+
+***View.js***
+```jsx
+import React, { Component } from 'react';
+import {
+	Platform,
+	StyleSheet,
+	Image
+} from 'react-native';
+import { connect } from 'react-redux';
+import LinearGradient from 'react-native-linear-gradient';
+import FadeView from './components/FadeView';
+import { getRegisteredReducerScope } from './data/Redux/DynamicReducer';
+import { Actions, ActionState, ActionBuilders } from './actions/Splash';
+
+class Splash extends Component {
+	afterFadeIn = () => {
+		this.props.createAfterFadeIn();
+	}
+	afterAnimation = () => {
+		this.props.createAfterAnimation(this.props.navigation);
+	}
+	render() {
+		return (
+			<LinearGradient style={styles.container} colors={['#2b313e', '#88c9f6']}>
+				<FadeView onAfterFadeIn={ this.afterFadeIn } onAfterAnimation={ this.afterAnimation }>
+					<Image source={require('../images/logos/appLogo.png')} style={styles.logo}/>
+				</FadeView>
+			</LinearGradient>
+		);
+	}
+}
+
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center'
+	},
+	container: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+		padding: 0
+	},
+	logo: {
+		resizeMode: 'contain',
+		transform: [
+			{ scaleX: 0.25 },
+			{ scaleY: 0.25 }
+		]
+	}
+});
+
+export default connect(ActionState, ActionBuilders)(Splash);
+```
+
+***DataStore.js***
+```javascript
+import { createStore, applyMiddleware } from 'redux';
+import DynamicReducer, { DynamicReducerMiddleware, InitDataStore } from  'dynamicReducer';
+
+const store = createStore(DynamicReducer, applyMiddleware(DynamicReducerMiddleware));
+InitDataStore(store);
+export default store;
+
+```
