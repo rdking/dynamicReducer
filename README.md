@@ -19,3 +19,14 @@ Highlights
 DynamicReducer introduces the concept of a scope for all actions, states, listeners, and reducers that it manages. This scope is just a string used to uniquely identify a bundle of state data, actions, listeners, and reducer functions that all have the same lifetime. This scope iswhat allows dynamicReducer to efficiently identify when your state data needs to be initialized, as well as remove it all once the chosen ending event has been fired.
 
 Documentation for the API can be found [here](https://rdking.github.io/dynamicReducer). More detail will be added as I learn how to use jsdoc.
+
+* ```registerReducerAction``` - Use to define a new action and reducer. The action creator will be set as a property on the connected component.
+* ```registerReducerActionListener``` - Use to define a new state listener.
+* ```registerReducerScopeState``` - Use to declare where in the redux state object state for this scope will be stored.
+* ```registerReducerModifiers``` - Use to configure the action that will remove this scope and the initializer function that will restore it.
+* ```getRegisteredReducerScope,``` - Use to retrieve the scope configuration to help setup calls to connect.
+* ```removeRegisteredReducerScope``` - Use to forcefully remove a declared scope at a time of your choosing.
+* ```InitDataStore``` - Use to give this library access to the data store.
+* ```DynamicReducerMiddleware``` - Use to automate management of scope and state configuration.
+
+//TODO: Add example code.
