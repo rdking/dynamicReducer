@@ -86,7 +86,6 @@ import {
 import { connect } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 import FadeView from './components/FadeView';
-import { getRegisteredReducerScope } from './data/Redux/DynamicReducer';
 import { Actions, ActionState, ActionBuilders } from './actions/Splash';
 
 class Splash extends Component {
