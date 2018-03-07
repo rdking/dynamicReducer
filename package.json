@@ -2,7 +2,7 @@
   "name": "dynamicreducer",
   "version": "1.0.0",
   "description": "Reduces boilerplate for setting up actions and the corresponding reducers. Also allows for automatic build-up and tear-down of state as actions are processed.",
-  "main": "dynamicReducer.js",
+  "main": "DynamicReducer.js",
   "directories": {
     "test": "tests"
   },
