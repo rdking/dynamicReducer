@@ -280,7 +280,8 @@ export function registerReducerScopeState(scope, root, init) {
  */
 export function registerReducerModifiers(scope, destroyAfter, initializer) {
 	if ((typeof(scope) != "string") || (scope in modifiers)) {
-		throw new Error("Parameter 'scope' must be a string not already registered!");
+		console.warn("Parameter 'scope' should be a string not already registered!\n" +
+			     "Overwriting previous definition!");
 	}
 	if (typeof(initializer) != "function") {
 		throw new Error ('Parameter "initializer" must be a function!');
